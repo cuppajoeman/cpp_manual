@@ -1,0 +1,131 @@
+<h1>Basics</h1>
+
+<h2>Include Header</h2>
+<pre><code>#include &lt;vector&gt;</code></pre>
+
+<h2>Declaration</h2>
+<pre><code>std::vector&lt;Type&gt; vec_name;</code></pre>
+
+<h2>Insertion</h2>
+<pre><code>
+vec_name.push_back(value);                      // Add to end
+vec_name.insert(vec_name.begin() + index, value);  // Insert at position
+</code></pre>
+
+<h2>Access Element</h2>
+<pre><code>
+Type val = vec_name[index];         // Direct access
+Type &amp;val = vec_name.at(index);      // Bounds-checked access
+</code></pre>
+
+<h2>Check if Empty</h2>
+<pre><code>
+if (vec_name.empty()) {
+  // Vector is empty
+}
+</code></pre>
+
+<h2>Erase Element</h2>
+<pre><code>
+vec_name.erase(vec_name.begin() + index);  // Remove at index
+vec_name.clear();                          // Remove all elements
+</code></pre>
+
+<h2>Iterate Through Elements</h2>
+<pre><code>
+for (const auto&amp; val : vec_name) {
+  std::cout &lt;&lt; val &lt;&lt; std::endl;
+}
+</code></pre>
+
+<p>In reverse order:</p>
+<pre><code>
+for (auto it = vec.rbegin(); it != vec.rend(); ++it) {
+  std::cout &lt;&lt; *it &lt;&lt; " ";
+}
+</code></pre>
+
+<h2>Reverse the order of a Vector</h2>
+<pre><code>
+std::reverse(vec.begin(), vec.end());
+</code></pre>
+
+<h2>Size and Capacity</h2>
+<pre><code>
+vec_name.size();            // Number of elements
+vec_name.capacity();        // Allocated storage capacity
+vec_name.resize(new_size);  // Resize vector
+</code></pre>
+
+<h2>Other Useful Functions</h2>
+<pre>
+    <code>
+vec_name.front();       // First element
+vec_name.back();        // Last element
+vec_name.pop_back();    // Remove last element
+    </code>
+</pre>
+
+<h2>Check if Element Exists</h2>
+<pre>
+<code>#include &lt;algorithm&gt;
+
+if (std::find(vec_name.begin(), vec_name.end(), value) != vec_name.end()) {
+  // Element found
+} else {
+  // Element not found
+}
+</code>
+</pre>
+
+<h1>declaration</h1>
+<pre>
+    <code>
+template&lt;class T, class Allocator = std::allocator&lt;T&gt;&gt; class vector;
+    </code>
+</pre>
+<span>T is the type of the stored values</span>
+
+
+<h1>member typedefs</h1>
+<span>types that are defined inside of this class</span>
+<table>
+    <tr>
+        <th>name</th>
+        <th>definition</th>
+    </tr>
+
+    <tr>
+        <td>value_type</td>
+        <td>T</td>
+    </tr>
+
+    <tr>
+        <td>reference</td>
+        <td>value_type&amp;</td>
+    </tr>
+
+    <tr>
+        <td>const_reference</td>
+        <td>const value_type&amp;</td>
+    </tr>
+
+</table>
+
+<h1>member functions</h1>
+
+<h2>element access</h2>
+<ul>
+    <li>
+        <code>T&amp; at(size_t pos)</code>
+        <p>
+            Returns a reference to the element at the specified index.
+        </p>
+    </li>
+    <li>
+        <code>T&amp; operator[](size_t pos);</code>
+        <p>
+            Returns a reference to the element at the specified index.
+        </p>
+    </li>
+</ul>

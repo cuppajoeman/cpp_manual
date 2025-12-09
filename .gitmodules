@@ -1,0 +1,6 @@
+[submodule "scripts/fast-html"]
+	path = scripts/fast-html
+	url = git@github.com:simple-web-tools/fast-html.git
+[submodule "scripts/fsweb"]
+	path = scripts/fsweb
+	url = git@github.com:simple-web-tools/fsweb.git
