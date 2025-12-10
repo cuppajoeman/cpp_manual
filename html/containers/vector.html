@@ -1,10 +1,10 @@
 <h1>Basics</h1>
 
 <h2>Include Header</h2>
-<pre><code>#include &lt;vector&gt;</code></pre>
+<pre><code>#include <vector></code></pre>
 
 <h2>Declaration</h2>
-<pre><code>std::vector&lt;Type&gt; vec_name;</code></pre>
+<pre><code>std::vector<Type> vec_name;</code></pre>
 
 <h2>Insertion</h2>
 <pre><code>
@@ -34,14 +34,14 @@ vec_name.clear();                          // Remove all elements
 <h2>Iterate Through Elements</h2>
 <pre><code>
 for (const auto&amp; val : vec_name) {
-  std::cout &lt;&lt; val &lt;&lt; std::endl;
+  std::cout << val << std::endl;
 }
 </code></pre>
 
 <p>In reverse order:</p>
 <pre><code>
 for (auto it = vec.rbegin(); it != vec.rend(); ++it) {
-  std::cout &lt;&lt; *it &lt;&lt; " ";
+  std::cout << *it << " ";
 }
 </code></pre>
 
@@ -68,7 +68,7 @@ vec_name.pop_back();    // Remove last element
 
 <h2>Check if Element Exists</h2>
 <pre>
-<code>#include &lt;algorithm&gt;
+<code>#include <algorithm>
 
 if (std::find(vec_name.begin(), vec_name.end(), value) != vec_name.end()) {
   // Element found
@@ -81,7 +81,7 @@ if (std::find(vec_name.begin(), vec_name.end(), value) != vec_name.end()) {
 <h1>declaration</h1>
 <pre>
     <code>
-template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</span> = std::allocator&lt;T&gt;&gt; class vector;
+template<class <span id="T">T</span>, class <span id="Allocator">Allocator</span> = std::allocator<T>> class vector;
     </code>
 </pre>
 <span><a href="#T">T</a> is the type of the stored values</span><br>
@@ -131,7 +131,7 @@ template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</s
             <td><span id="pointer">pointer</span></td>
             <td>
                 <a href="#Allocator">Allocator</a>::pointer (until C++11)<br>
-                std::allocator_traits&lt;<a href="#Allocator">Allocator</a>&gt;::pointer (since C++11)
+                std::allocator_traits<<a href="#Allocator">Allocator</a>>::pointer (since C++11)
             </td>
             <td>Pointer type to elements in the vector.</td>
         </tr>
@@ -139,7 +139,7 @@ template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</s
             <td><span id="const_pointer">const_pointer</span></td>
             <td>
                 <a href="#Allocator">Allocator</a>::const_pointer (until C++11)<br>
-                std::allocator_traits&lt;<a href="#Allocator">Allocator</a>&gt;::const_pointer (since C++11)
+                std::allocator_traits<<a href="#Allocator">Allocator</a>>::const_pointer (since C++11)
             </td>
             <td>Const pointer type to elements in the vector.</td>
         </tr>
@@ -161,12 +161,12 @@ template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</s
         </tr>
         <tr>
             <td><span id="reverse_iterator">reverse_iterator</span></td>
-            <td>std::reverse_iterator&lt;<a href="#iterator">iterator</a>&gt;</td>
+            <td>std::reverse_iterator<<a href="#iterator">iterator</a>></td>
             <td>Iterator that traverses elements in reverse order.</td>
         </tr>
         <tr>
             <td><span id="const_reverse_iterator">const_reverse_iterator</span></td>
-            <td>std::reverse_iterator&lt;<a href="#const_iterator">const_iterator</a>&gt;</td>
+            <td>std::reverse_iterator<<a href="#const_iterator">const_iterator</a>></td>
             <td>Const iterator that traverses elements in reverse order.</td>
         </tr>
     </tbody>
@@ -274,7 +274,7 @@ template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</s
         <p>Inserts count copies of value before pos.</p>
     </li>
     <li>
-        <code>template&lt;typename InputIt&gt; <a href="#iterator">iterator</a> insert(<a href="#iterator">iterator</a> pos, InputIt first, InputIt last)</code>
+        <code>template<typename InputIt> <a href="#iterator">iterator</a> insert(<a href="#iterator">iterator</a> pos, InputIt first, InputIt last)</code>
         <p>Inserts elements from range [first, last) before pos.</p>
     </li>
     <li>
@@ -306,7 +306,7 @@ template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</s
         <p>Changes the number of elements stored and fills new elements with value.</p>
     </li>
     <li>
-        <code>void swap(vector&lt;<a href="#T">T</a>, <a href="#Allocator">Allocator</a>&gt;&amp; other)</code>
+        <code>void swap(vector<<a href="#T">T</a>, <a href="#Allocator">Allocator</a>>&amp; other)</code>
         <p>Exchanges the contents with another vector.</p>
     </li>
 </ul>

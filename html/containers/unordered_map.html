@@ -4,9 +4,9 @@
 template<
     class <span id="Key">Key</span>,
     class <span id="T">T</span>,
-    class <span id="Hash">Hash</span> = std::hash&lt;Key&gt;,
-    class <span id="KeyEqual">KeyEqual</span> = std::equal_to&lt;Key&gt;,
-    class <span id="Allocator">Allocator</span> = std::allocator&lt;std::pair&lt;const Key, T&gt;&gt;
+    class <span id="Hash">Hash</span> = std::hash<Key>,
+    class <span id="KeyEqual">KeyEqual</span> = std::equal_to<Key>,
+    class <span id="Allocator">Allocator</span> = std::allocator<std::pair<const Key, T>>
 > class unordered_map;
     </code>
 </pre>
@@ -38,7 +38,7 @@ template<
         </tr>
         <tr>
             <td><span id="value_type">value_type</span></td>
-            <td>std::pair&lt;const <a href="#Key">Key</a>, <a href="#T">T</a>&gt;</td>
+            <td>std::pair<const <a href="#Key">Key</a>, <a href="#T">T</a>></td>
             <td>Type of elements stored in the container.</td>
         </tr>
         <tr>
@@ -166,11 +166,11 @@ template<
         <p>Removes all elements from the container.</p>
     </li>
     <li>
-        <code>std::pair&lt;<a href="#iterator">iterator</a>, bool&gt; insert(const <a href="#value_type">value_type</a>&amp; value)</code>
+        <code>std::pair<<a href="#iterator">iterator</a>, bool> insert(const <a href="#value_type">value_type</a>&amp; value)</code>
         <p>Inserts an element. Returns a pair consisting of an iterator to the element and a bool indicating whether insertion took place.</p>
     </li>
     <li>
-        <code>template&lt;typename InputIt&gt; void insert(InputIt first, InputIt last)</code>
+        <code>template<typename InputIt> void insert(InputIt first, InputIt last)</code>
         <p>Inserts elements from the range [first, last).</p>
     </li>
     <li>
@@ -182,7 +182,7 @@ template<
         <p>Removes the element with the specified key. Returns the number of elements removed (0 or 1).</p>
     </li>
     <li>
-        <code>void swap(unordered_map&lt;<a href="#Key">Key</a>, <a href="#T">T</a>&gt;&amp; other)</code>
+        <code>void swap(unordered_map<<a href="#Key">Key</a>, <a href="#T">T</a>>&amp; other)</code>
         <p>Exchanges the contents with another unordered_map.</p>
     </li>
 </ul>
