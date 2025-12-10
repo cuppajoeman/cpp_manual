@@ -1,0 +1,115 @@
+<p>
+  In this article we're going to look at having a templated type, with the existance of a member attribute being dependent on the template arguments. 
+</p>
+
+<p>
+  We're going to pull our motivation from a real world example of creating a vector class, where we want to template out the base vector class to allow it to contain any type, but only have x, y, z, w for vectors that have dimensions that support it.
+</p>
+
+<p>
+  The fundemamental idea is that since we can not conditionally define member attributes, we use inheritance and combine it with template specialization to make it happen:
+</p>
+
+
+<pre>
+  <code>
+#include <iostream>
+
+template <typename T, bool Enabled = true>
+struct OptionalMember {
+    T member_name;
+};
+
+template <typename T>
+struct OptionalMember<T, false> {};
+
+template <int N>
+struct MyClass : OptionalMember<int, (N % 2 == 0)> {};
+
+int main() {
+    MyClass<4> even_instance; // N is even
+    even_instance.member_name = 42; // OK, member exists
+
+    MyClass<3> odd_instance;  // N is odd
+    // odd_instance.member_name = 10; // ERROR: member_name does not exist
+
+    std::cout << even_instance.member_name << "\n";
+}
+
+  </code>
+</pre>
+
+<p>
+  We can extend this idea further to do more complex things, such as passing in more information to the optional member classes if needed. In the following example .y holds a reference to the element at index 1 in the vector. 
+</p>
+      
+<pre>
+  <code>
+template <typename T, size_t N, bool HasX = (N >= 1)> struct x_ref_base {
+    T &x;
+    x_ref_base(std::array<T, N> &data) : x(data[0]) {}
+};
+
+template <typename T, size_t N> struct x_ref_base<T, N, false> {
+    x_ref_base(std::array<T, N> &) {}
+};
+
+template <typename T, size_t N, bool HasY = (N >= 2)> struct y_ref_base {
+    T &y;
+    y_ref_base(std::array<T, N> &data) : y(data[1]) {}
+};
+template <typename T, size_t N> struct y_ref_base<T, N, false> {
+    y_ref_base(std::array<T, N> &) {}
+};
+
+template <typename T, size_t N, bool HasZ = (N >= 3)> struct z_ref_base {
+    T &z;
+    z_ref_base(std::array<T, N> &data) : z(data[2]) {}
+};
+template <typename T, size_t N> struct z_ref_base<T, N, false> {
+    z_ref_base(std::array<T, N> &) {}
+};
+
+template <typename T, size_t N, bool HasW = (N >= 4)> struct w_ref_base {
+    T &w;
+    w_ref_base(std::array<T, N> &data) : w(data[3]) {}
+};
+template <typename T, size_t N> struct w_ref_base<T, N, false> {
+    w_ref_base(std::array<T, N> &) {}
+};
+
+template <typename T, size_t N>
+struct tvec : public x_ref_base<T, N>, y_ref_base<T, N>, z_ref_base<T, N>, w_ref_base<T, N> {
+    std::array<T, N> data{};
+
+    // NOTE: this constructor is called in every constructor to give the x, y, z, w
+    tvec()
+        : x_ref_base<T, N>(this->data), y_ref_base<T, N>(this->data), z_ref_base<T, N>(this->data),
+          w_ref_base<T, N>(this->data) {
+        data.fill(T(0));
+    }
+
+    tvec(std::initializer_list<T> list) : tvec() {
+        assert(list.size() == N);
+        std::copy(list.begin(), list.end(), data.begin());
+    }
+
+    // allows us to do glm::vec3(0)
+    explicit tvec(T val) : tvec() { data.fill(val); }
+
+    // allows us to do glm::vec2(x, y)
+    template <typename... Ts> tvec(Ts... vals) : tvec() {
+        static_assert(sizeof...(Ts) == N, "Number of arguments must match vector size");
+        T tmp[] = {static_cast<T>(vals)...};
+        for (size_t i = 0; i < N; ++i) {
+            data[i] = tmp[i];
+        }
+    }
+   ...
+}
+  </code>
+</pre>
+
+<p>
+  Note the importance of every other constructor filtering through the default constructor. This was done to avoid duplication in the other constructors.
+</p>
