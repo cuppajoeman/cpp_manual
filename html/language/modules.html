@@ -1,1 +1,76 @@
+<h1>Motivation</h1> 
+<p>
+  C++20 modules exist to replace the traditional header-based inclusion model with a safer and more efficient system. The old model relied on textual inclusion, which caused long compile times, complicated dependency structures, and issues such as accidental name collisions and macro interference. 
+</p> 
 
+<h3>Old method: header and implementation</h3>
+
+<code>math_utils.h</code>
+<pre><code>
+#ifndef MATH_UTILS_H
+#define MATH_UTILS_H
+
+int add(int a, int b);
+
+#endif
+</code></pre>
+
+
+<code>math_utils.cpp</code>
+
+<pre><code>
+#include "math_utils.h"
+
+int add(int a, int b) {
+    return a + b;
+}
+</code></pre>
+
+
+<code>main.cpp</code>
+<pre><code>
+#include "math_utils.h"
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; add(2, 3) &lt;&lt; "\n";
+}
+</code></pre>
+
+<h3>New method: module interface and import</h3>
+
+<code>math_utils.ixx (module interface)</code>
+<pre><code>
+export module math_utils;
+
+export int add(int a, int b);
+</code></pre>
+
+<code>math_utils.cpp (module implementation)</code>
+module math_utils;
+
+int add(int a, int b) {
+    return a + b;
+}
+</code></pre>
+
+<code>main.cpp</code>
+<pre><code>
+import math_utils;
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; add(2, 3) &lt;&lt; "\n";
+}
+</code></pre>
+
+<h2>What's the difference?</h2>
+<p>
+The module-based version improves the build process because the compiler does not need to repeatedly re-parse the same header text in every translation unit. Instead, the module interface is compiled once into a binary module interface, and all importing files can reuse that precompiled result.
+</p>
+<p>
+Modules also avoid problems caused by the preprocessor. Textual inclusion allows macros and accidental name clashes to leak into or out of headers, which can cause subtle bugs. Modules create a clear boundary: only the names explicitly exported become visible, and macros cannot cross that boundary.
+</p>
+<p>
+This results in faster builds, cleaner code organization, and more reliable separation between interface and implementation.
+</p>
