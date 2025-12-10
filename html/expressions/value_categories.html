@@ -1,1 +1,54 @@
-rvalue
+<p>Every expression in C++ has a value category. Modern C++ uses three primary categories:</p>
+
+<ul>
+  <li><code>prvalue</code></li>
+  <li><code>xvalue</code></li>
+  <li><code>lvalue</code></li>
+</ul>
+
+<p>
+  The usage of l and r in the naming came from the idea of the left and right hand side of an assignment statement. But in modern c++ this is no longer this case since assignment position no longer determines the value category [TODO] example.
+</p>
+
+<h2>Pure R-value (prvalue)</h2>
+<p>
+  A <strong>prvalue</strong> is a value that does not have identity. It typically
+  represents a temporary or a computed value. Evaluating a prvalue initializes
+  an object but does not refer to an existing object with identity.
+</p>
+<p><strong>Examples:</strong></p>
+<pre>
+  <code>3
+x + y
+std::string("hello")
+  </code>
+</pre>
+
+<h2>Expiring Value (xvalue)</h2>
+<p>
+  An <strong>xvalue</strong> is an expression that has identity but whose resources
+  can be reused (about to expire). Xvalues arise from certain rvalue expressions,
+  such as a function returning an rvalue reference.
+</p>
+<p><strong>Examples:</strong></p>
+<pre>
+  <code>
+std::move(obj)       // object with identity but eligible for reuse
+f().member           // if f() returns T&&
+</code>
+</pre>
+
+<h2>L-Value (lvalue)</h2>
+<p>
+  An <strong>lvalue</strong> refers to an object with identity. It has a stable
+  location in memory and cannot bind to rvalue references. Most named variables
+  and objects are lvalues.
+</p>
+<p><strong>Examples:</strong></p>
+<pre>
+  <code>
+x           // named variable
+arr[i]      // subscript produces lvalue
+*p          // dereferencing a pointer
+  </code>
+</pre>
