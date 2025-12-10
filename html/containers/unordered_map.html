@@ -1,0 +1,188 @@
+<h1>declaration</h1>
+<pre>
+    <code>
+template<
+    class <span id="Key">Key</span>,
+    class <span id="T">T</span>,
+    class <span id="Hash">Hash</span> = std::hash&lt;Key&gt;,
+    class <span id="KeyEqual">KeyEqual</span> = std::equal_to&lt;Key&gt;,
+    class <span id="Allocator">Allocator</span> = std::allocator&lt;std::pair&lt;const Key, T&gt;&gt;
+> class unordered_map;
+    </code>
+</pre>
+<span><a href="#Key">Key</a> is the type of the keys</span><br>
+<span><a href="#T">T</a> is the type of the mapped values</span><br>
+<span><a href="#Hash">Hash</a> is the hash function object</span><br>
+<span><a href="#KeyEqual">KeyEqual</a> is the equality comparison function</span><br>
+<span><a href="#Allocator">Allocator</a> is the allocator used to manage memory</span>
+
+<h2>member types</h2>
+<table border="1" cellpadding="4" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Member type</th>
+            <th>Definition</th>
+            <th>Explanation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span id="key_type">key_type</span></td>
+            <td><a href="#Key">Key</a></td>
+            <td>Type of the keys.</td>
+        </tr>
+        <tr>
+            <td><span id="mapped_type">mapped_type</span></td>
+            <td><a href="#T">T</a></td>
+            <td>Type of the mapped values.</td>
+        </tr>
+        <tr>
+            <td><span id="value_type">value_type</span></td>
+            <td>std::pair&lt;const <a href="#Key">Key</a>, <a href="#T">T</a>&gt;</td>
+            <td>Type of elements stored in the container.</td>
+        </tr>
+        <tr>
+            <td><span id="hasher">hasher</span></td>
+            <td><a href="#Hash">Hash</a></td>
+            <td>The hash function type.</td>
+        </tr>
+        <tr>
+            <td><span id="key_equal">key_equal</span></td>
+            <td><a href="#KeyEqual">KeyEqual</a></td>
+            <td>The equality comparison function type.</td>
+        </tr>
+        <tr>
+            <td><span id="allocator_type">allocator_type</span></td>
+            <td><a href="#Allocator">Allocator</a></td>
+            <td>Allocator type.</td>
+        </tr>
+        <tr>
+            <td><span id="size_type">size_type</span></td>
+            <td>Unsigned integer type (usually std::size_t)</td>
+            <td>Used for sizes and indices.</td>
+        </tr>
+        <tr>
+            <td><span id="difference_type">difference_type</span></td>
+            <td>Signed integer type (usually std::ptrdiff_t)</td>
+            <td>Used for differences between iterators.</td>
+        </tr>
+        <tr>
+            <td><span id="reference">reference</span></td>
+            <td><a href="#value_type">value_type</a>&amp;</td>
+            <td>Reference to an element, allows modification.</td>
+        </tr>
+        <tr>
+            <td><span id="const_reference">const_reference</span></td>
+            <td>const <a href="#value_type">value_type</a>&amp;</td>
+            <td>Const reference to an element, read-only access.</td>
+        </tr>
+        <tr>
+            <td><span id="iterator">iterator</span></td>
+            <td>Iterator to <a href="#value_type">value_type</a></td>
+            <td>Traverses and modifies elements.</td>
+        </tr>
+        <tr>
+            <td><span id="const_iterator">const_iterator</span></td>
+            <td>Const iterator to <a href="#value_type">value_type</a></td>
+            <td>Traverses elements without modification.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>member functions</h1>
+
+<h2>element access</h2>
+<ul>
+    <li>
+        <code><a href="#mapped_type">mapped_type</a>&amp; at(const <a href="#key_type">Key</a>&amp; key)</code>
+        <p>Returns a reference to the value corresponding to key. Throws <code>std::out_of_range</code> if key not found.</p>
+    </li>
+    <li>
+        <code><a href="#mapped_type">mapped_type</a>&amp; operator[](const <a href="#key_type">Key</a>&amp; key)</code>
+        <p>Returns a reference to the value corresponding to key. If key does not exist, a new element is inserted.</p>
+    </li>
+</ul>
+
+<h2>iterators</h2>
+<ul>
+    <li>
+        <code><a href="#iterator">iterator</a> begin()</code>
+        <p>Returns an iterator to the first element.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> end()</code>
+        <p>Returns an iterator to one past the last element.</p>
+    </li>
+    <li>
+        <code><a href="#const_iterator">const_iterator</a> cbegin() const</code>
+        <p>Returns a const iterator to the first element.</p>
+    </li>
+    <li>
+        <code><a href="#const_iterator">const_iterator</a> cend() const</code>
+        <p>Returns a const iterator to one past the last element.</p>
+    </li>
+</ul>
+
+<h2>capacity</h2>
+<ul>
+    <li>
+        <code>bool empty() const</code>
+        <p>Returns true if the container has no elements.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> size() const</code>
+        <p>Returns the number of elements.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> max_size() const</code>
+        <p>Returns the maximum number of elements the container can hold.</p>
+    </li>
+    <li>
+        <code>void reserve(<a href="#size_type">size_type</a> n)</code>
+        <p>Reserves space for at least n elements.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> bucket_count() const</code>
+        <p>Returns the number of buckets in the hash table.</p>
+    </li>
+    <li>
+        <code>float load_factor() const</code>
+        <p>Returns the average number of elements per bucket.</p>
+    </li>
+    <li>
+        <code>float max_load_factor() const</code>
+        <p>Returns the maximum allowed load factor.</p>
+    </li>
+    <li>
+        <code>void rehash(<a href="#size_type">size_type</a> count)</code>
+        <p>Sets the number of buckets to at least count.</p>
+    </li>
+</ul>
+
+<h2>modifiers</h2>
+<ul>
+    <li>
+        <code>void clear()</code>
+        <p>Removes all elements from the container.</p>
+    </li>
+    <li>
+        <code>std::pair&lt;<a href="#iterator">iterator</a>, bool&gt; insert(const <a href="#value_type">value_type</a>&amp; value)</code>
+        <p>Inserts an element. Returns a pair consisting of an iterator to the element and a bool indicating whether insertion took place.</p>
+    </li>
+    <li>
+        <code>template&lt;typename InputIt&gt; void insert(InputIt first, InputIt last)</code>
+        <p>Inserts elements from the range [first, last).</p>
+    </li>
+    <li>
+        <code>void erase(<a href="#iterator">iterator</a> pos)</code>
+        <p>Removes the element at the given iterator position.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> erase(const <a href="#key_type">Key</a>&amp; key)</code>
+        <p>Removes the element with the specified key. Returns the number of elements removed (0 or 1).</p>
+    </li>
+    <li>
+        <code>void swap(unordered_map&lt;<a href="#Key">Key</a>, <a href="#T">T</a>&gt;&amp; other)</code>
+        <p>Exchanges the contents with another unordered_map.</p>
+    </li>
+</ul>

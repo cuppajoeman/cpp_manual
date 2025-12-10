@@ -81,51 +81,232 @@ if (std::find(vec_name.begin(), vec_name.end(), value) != vec_name.end()) {
 <h1>declaration</h1>
 <pre>
     <code>
-template&lt;class T, class Allocator = std::allocator&lt;T&gt;&gt; class vector;
+template&lt;class <span id="T">T</span>, class <span id="Allocator">Allocator</span> = std::allocator&lt;T&gt;&gt; class vector;
     </code>
 </pre>
-<span>T is the type of the stored values</span>
+<span><a href="#T">T</a> is the type of the stored values</span><br>
+<span><a href="#Allocator">Allocator</a> is the allocator type used to manage memory</span>
 
-
-<h1>member typedefs</h1>
-<span>types that are defined inside of this class</span>
-<table>
-    <tr>
-        <th>name</th>
-        <th>definition</th>
-    </tr>
-
-    <tr>
-        <td>value_type</td>
-        <td>T</td>
-    </tr>
-
-    <tr>
-        <td>reference</td>
-        <td>value_type&amp;</td>
-    </tr>
-
-    <tr>
-        <td>const_reference</td>
-        <td>const value_type&amp;</td>
-    </tr>
-
+<h2>member types</h2>
+<table border="1" cellpadding="4" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Member type</th>
+            <th>Definition</th>
+            <th>Explanation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span id="value_type">value_type</span></td>
+            <td><a href="#T">T</a></td>
+            <td>The type of elements stored in the vector.</td>
+        </tr>
+        <tr>
+            <td><span id="allocator_type">allocator_type</span></td>
+            <td><a href="#Allocator">Allocator</a></td>
+            <td>The allocator used by the vector to manage memory.</td>
+        </tr>
+        <tr>
+            <td><span id="size_type">size_type</span></td>
+            <td>Unsigned integer type (usually std::size_t)</td>
+            <td>Used for sizes and indices.</td>
+        </tr>
+        <tr>
+            <td><span id="difference_type">difference_type</span></td>
+            <td>Signed integer type (usually std::ptrdiff_t)</td>
+            <td>Used for differences between iterators.</td>
+        </tr>
+        <tr>
+            <td><span id="reference">reference</span></td>
+            <td><a href="#value_type">value_type</a>&amp;</td>
+            <td>Reference to an element, allows modification.</td>
+        </tr>
+        <tr>
+            <td><span id="const_reference">const_reference</span></td>
+            <td>const <a href="#value_type">value_type</a>&amp;</td>
+            <td>Const reference to an element, read-only access.</td>
+        </tr>
+        <tr>
+            <td><span id="pointer">pointer</span></td>
+            <td>
+                <a href="#Allocator">Allocator</a>::pointer (until C++11)<br>
+                std::allocator_traits&lt;<a href="#Allocator">Allocator</a>&gt;::pointer (since C++11)
+            </td>
+            <td>Pointer type to elements in the vector.</td>
+        </tr>
+        <tr>
+            <td><span id="const_pointer">const_pointer</span></td>
+            <td>
+                <a href="#Allocator">Allocator</a>::const_pointer (until C++11)<br>
+                std::allocator_traits&lt;<a href="#Allocator">Allocator</a>&gt;::const_pointer (since C++11)
+            </td>
+            <td>Const pointer type to elements in the vector.</td>
+        </tr>
+        <tr>
+            <td><span id="iterator">iterator</span></td>
+            <td>
+                LegacyRandomAccessIterator and LegacyContiguousIterator to <a href="#value_type">value_type</a> (until C++20)<br>
+                LegacyRandomAccessIterator, contiguous_iterator, and ConstexprIterator to <a href="#value_type">value_type</a> (since C++20)
+            </td>
+            <td>Iterator type that can traverse and modify elements.</td>
+        </tr>
+        <tr>
+            <td><span id="const_iterator">const_iterator</span></td>
+            <td>
+                LegacyRandomAccessIterator and LegacyContiguousIterator to const <a href="#value_type">value_type</a> (until C++20)<br>
+                LegacyRandomAccessIterator, contiguous_iterator, and ConstexprIterator to const <a href="#value_type">value_type</a> (since C++20)
+            </td>
+            <td>Iterator type that can traverse elements but cannot modify them.</td>
+        </tr>
+        <tr>
+            <td><span id="reverse_iterator">reverse_iterator</span></td>
+            <td>std::reverse_iterator&lt;<a href="#iterator">iterator</a>&gt;</td>
+            <td>Iterator that traverses elements in reverse order.</td>
+        </tr>
+        <tr>
+            <td><span id="const_reverse_iterator">const_reverse_iterator</span></td>
+            <td>std::reverse_iterator&lt;<a href="#const_iterator">const_iterator</a>&gt;</td>
+            <td>Const iterator that traverses elements in reverse order.</td>
+        </tr>
+    </tbody>
 </table>
+
 
 <h1>member functions</h1>
 
 <h2>element access</h2>
 <ul>
     <li>
-        <code>T&amp; at(size_t pos)</code>
-        <p>
-            Returns a reference to the element at the specified index.
-        </p>
+        <code><a href="#reference">reference</a> at(<a href="#size_type">size_type</a> pos)</code>
+        <p>Returns a reference to the element at the specified index. Throws <code>std::out_of_range</code> if pos ≥ size().</p>
     </li>
     <li>
-        <code>T&amp; operator[](size_t pos);</code>
-        <p>
-            Returns a reference to the element at the specified index.
-        </p>
+        <code><a href="#reference">reference</a> operator[](<a href="#size_type">size_type</a> pos)</code>
+        <p>Returns a reference to the element at the specified index. No bounds checking.</p>
+    </li>
+    <li>
+        <code><a href="#reference">reference</a> front()</code>
+        <p>Returns a reference to the first element.</p>
+    </li>
+    <li>
+        <code><a href="#reference">reference</a> back()</code>
+        <p>Returns a reference to the last element.</p>
+    </li>
+    <li>
+        <code><a href="#T">T</a>* data()</code>
+        <p>Returns a pointer to the underlying array serving as element storage.</p>
+    </li>
+</ul>
+
+<h2>iterators</h2>
+<ul>
+    <li>
+        <code><a href="#iterator">iterator</a> begin()</code>
+        <p>Returns an iterator to the first element.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> end()</code>
+        <p>Returns an iterator to one past the last element.</p>
+    </li>
+    <li>
+        <code><a href="#reverse_iterator">reverse_iterator</a> rbegin()</code>
+        <p>Returns a reverse iterator to the last element.</p>
+    </li>
+    <li>
+        <code><a href="#reverse_iterator">reverse_iterator</a> rend()</code>
+        <p>Returns a reverse iterator to one before the first element.</p>
+    </li>
+    <li>
+        <code><a href="#const_iterator">const_iterator</a> cbegin() const</code>
+        <p>Returns a const iterator to the first element.</p>
+    </li>
+    <li>
+        <code><a href="#const_iterator">const_iterator</a> cend() const</code>
+        <p>Returns a const iterator to one past the last element.</p>
+    </li>
+</ul>
+
+<h2>capacity</h2>
+<ul>
+    <li>
+        <code>bool empty() const</code>
+        <p>Returns true if the vector has no elements.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> size() const</code>
+        <p>Returns the number of elements in the vector.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> max_size() const</code>
+        <p>Returns the maximum number of elements the vector can hold.</p>
+    </li>
+    <li>
+        <code>void reserve(<a href="#size_type">size_type</a> new_cap)</code>
+        <p>Increases the capacity of the vector to at least new_cap.</p>
+    </li>
+    <li>
+        <code><a href="#size_type">size_type</a> capacity() const</code>
+        <p>Returns the number of elements that can be held in currently allocated storage.</p>
+    </li>
+    <li>
+        <code>void shrink_to_fit()</code>
+        <p>Reduces capacity to fit the size, if possible.</p>
+    </li>
+</ul>
+
+<h2>modifiers</h2>
+<ul>
+    <li>
+        <code>void clear()</code>
+        <p>Removes all elements from the vector.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> insert(<a href="#iterator">iterator</a> pos, const <a href="#value_type">T</a>&amp; value)</code>
+        <p>Inserts value before pos.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> insert(<a href="#iterator">iterator</a> pos, <a href="#value_type">T</a>&& value)</code>
+        <p>Inserts value before pos using move semantics.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> insert(<a href="#iterator">iterator</a> pos, <a href="#size_type">size_type</a> count, const <a href="#value_type">T</a>&amp; value)</code>
+        <p>Inserts count copies of value before pos.</p>
+    </li>
+    <li>
+        <code>template&lt;typename InputIt&gt; <a href="#iterator">iterator</a> insert(<a href="#iterator">iterator</a> pos, InputIt first, InputIt last)</code>
+        <p>Inserts elements from range [first, last) before pos.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> erase(<a href="#iterator">iterator</a> pos)</code>
+        <p>Removes the element at pos.</p>
+    </li>
+    <li>
+        <code><a href="#iterator">iterator</a> erase(<a href="#iterator">iterator</a> first, <a href="#iterator">iterator</a> last)</code>
+        <p>Removes elements in the range [first, last).</p>
+    </li>
+    <li>
+        <code>void push_back(const <a href="#value_type">T</a>&amp; value)</code>
+        <p>Adds an element to the end.</p>
+    </li>
+    <li>
+        <code>void push_back(<a href="#value_type">T</a>&& value)</code>
+        <p>Adds an element to the end using move semantics.</p>
+    </li>
+    <li>
+        <code>void pop_back()</code>
+        <p>Removes the last element.</p>
+    </li>
+    <li>
+        <code>void resize(<a href="#size_type">size_type</a> count)</code>
+        <p>Changes the number of elements stored.</p>
+    </li>
+    <li>
+        <code>void resize(<a href="#size_type">size_type</a> count, const <a href="#value_type">T</a>&amp; value)</code>
+        <p>Changes the number of elements stored and fills new elements with value.</p>
+    </li>
+    <li>
+        <code>void swap(vector&lt;<a href="#T">T</a>, <a href="#Allocator">Allocator</a>&gt;&amp; other)</code>
+        <p>Exchanges the contents with another vector.</p>
     </li>
 </ul>
