@@ -1,1 +1,18 @@
+<h1>Motivation</h1>
+<p>When you want to replace the value of a variable while keeping its old value, you usually have to introduce a temporary variable:</p>
+<pre><code>
+int x = 5;
+int new_value = 10;
 
+int old_value = x;
+x = new_value;
+</code></pre>
+
+<p><code>With exchange, we no longer need this:</p>
+<pre><code>#include <utility>
+
+int x = 5;
+int old_value = std::exchange(x, 10); 
+// x is now 10
+// old_value is 5 (the original value of x)
+</code></pre>
