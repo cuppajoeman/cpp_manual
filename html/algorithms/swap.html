@@ -1,1 +1,20 @@
+<h1>Motivation</h1>
+<p>When you want to swap the value of two variables, you must introduce a third because without it one of the original values would be lost:</p>
+<pre><code>
+int a = 5;
+int b = 10;
 
+// Manual swap using a temporary variable
+int temp = a;
+a = b;
+b = temp;
+</code></pre>
+<p><code>std::swap</code> is there to simplify this operation, making the code cleaner and less error-prone:</p>
+<pre><code>
+#include <utility>;
+
+int a = 5;
+int b = 10;
+
+std::swap(a, b);
+</code></pre>
