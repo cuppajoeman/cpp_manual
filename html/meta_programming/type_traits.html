@@ -1,1 +1,36 @@
+<h1>Motivation</h1>
+<p>
+  Type traits provide a compile-time mechanism to query and manipulate properties of types using templates. 
+</p>
+
+<h1>Example</h1>
+<p>
+  Using type traits, we can write a template that behaves differently depending on whether a type is an integral type or not. For instance:
+</p>
+
+<pre>
+  <code>
+#include <type_traits>
+#include <iostream>
+
+template <typename T>
+void print_type_info(T value) {
+    if constexpr (std::is_integral<T>::value) {
+        std::cout << "Integral type: " << value << "\n";
+    } else {
+        std::cout << "Non-integral type: " << value << "\n";
+    }
+}
+
+int main() {
+    print_type_info(42);       // Integral type
+    print_type_info(3.14);     // Non-integral type
+}
+
+</code>
+</pre>
+          
+<p>
+  In this example, <code>std::is_integral&lt;T&gt;</code> is a type trait that tells us at compile time whether <code>T</code> is an integral type, enabling different behavior without runtime overhead.
+</p>
 
