@@ -90,3 +90,116 @@ arr[i]      // subscript produces lvalue
 *p          // dereferencing a pointer
   </code>
 </pre>
+
+
+
+<h2>Universal/Forwarding Reference</h2>
+<p>
+  Suppose we have the following code:
+</p>
+<pre>
+<code>
+#include <iostream>
+#include <string>
+#include <utility> // for std::move
+
+// 1. Accept const lvalue reference: we just want to read it
+void log_internal(const std::string& msg) {
+    std::cout << "Logging const lvalue reference: " << msg << "\n";
+}
+
+// 2. Accept non-const lvalue reference: we might modify it
+void log_internal(std::string& msg) {
+    msg += " [logged]";
+    std::cout << "Logging non-const lvalue reference: " << msg << "\n";
+}
+
+// 3. Accept rvalue reference: we can move it
+void log_internal(std::string&& msg) {
+    std::cout << "Logging rvalue reference: " << msg << "\n";
+}
+
+int main() {
+    std::string s1 = "Hello";
+    const std::string s2 = "World";
+
+    log_internal(s1);        // calls non-const lvalue
+    log_internal(s2);        // calls const lvalue
+    log_internal("Temp!");   // calls rvalue
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>
+  Now we realize that we want to be able to log <strong>anything</strong>, not just strings. A naive approach would be to create three different template signatures:
+</p>
+<pre>
+<code>
+template <typename T>
+void log_internal(const T& msg) { ... }
+
+template <typename T>
+void log_internal(T& msg) { ... }
+
+template <typename T>
+void log_internal(T&& msg) { ... }
+</code>
+</pre>
+
+<p>
+  The problem with this approach is that templates are supposed to reduce boilerplate, but here we are duplicating code three times. This goes against the very purpose of templates.
+</p>
+
+<h3>The proper way: Universal/Forwarding References</h3>
+<p>
+  Instead of writing three templates, we can use a <em>universal reference</em> and <code>std::forward</code> to perfectly forward the argument to the correct internal function. Here's an example:
+</p>
+<pre>
+<code>
+#include <iostream>
+#include <string>
+#include <utility> // for std::forward
+
+// Internal implementations
+void log_internal_impl(const std::string& msg) {
+    std::cout << "Logging const lvalue reference: " << msg << "\n";
+}
+
+void log_internal_impl(std::string& msg) {
+    msg += " [logged]";
+    std::cout << "Logging non-const lvalue reference: " << msg << "\n";
+}
+
+void log_internal_impl(std::string&& msg) {
+    std::cout << "Logging rvalue reference: " << msg << "\n";
+}
+
+// Forwarding template
+template <typename T>
+void log_internal(T&& msg) {             // universal reference
+    log_internal_impl(std::forward<T>(msg));
+}
+
+int main() {
+    std::string s1 = "Hello";
+    const std::string s2 = "World";
+
+    log_internal(s1);        // calls non-const lvalue
+    log_internal(s2);        // calls const lvalue
+    log_internal("Temp!");   // calls rvalue
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>
+  <strong>Why this works:</strong>
+</p>
+<ul>
+  <li><code>T&&amp</code> in a template is a <em>forwarding (universal) reference</em>, which can bind to both lvalues and rvalues.</li>
+  <li><code>std::forward<T>(msg)</code> preserves the original value category: it forwards lvalues as lvalues and rvalues as rvalues.</li>
+  <li>We now only need a single template function instead of three, keeping the code clean and maintainable.</li>
+</ul>
