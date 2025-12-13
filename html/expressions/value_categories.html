@@ -6,8 +6,46 @@
   <li><code>lvalue</code></li>
 </ul>
 
+<h2>evolution of value categories</h2>
+
 <p>
-  The usage of l and r in the naming came from the idea of the left and right hand side of an assignment statement. But in modern c++ this is no longer this case since assignment position no longer determines the value category [TODO] example.
+  The usage of l and r in the naming came from the idea of the left and right hand side of an assignment statement. In C we had code like this:
+</p>
+
+<pre>
+  <code>
+    int i;
+    i = 42; // ok
+    42 = i; // error
+  </code>
+</pre>
+
+<p>
+  From this basic example we can deduce what types of things can be on the left vs right side of an assignment statement. This gave a way of categorizing expressions either as l-values or r-values. From here we can see what types of operations are avilable for different value categories:
+</p>
+
+<pre>
+  <code>
+    int* p = &i; // getting the memory address of an l-value is fine
+    int* q = &42 // error, you can't get the memory address of an r-value
+  </code>
+</pre>
+
+<p>
+  But in modern c++ this is no longer this case since assignment position no longer determines the value category, because the following code valid:
+</p>
+
+<pre>
+  <code>
+    std::string s;
+    std::move(s) = "hello"; // valid it acts like an l-value
+    // if std::move(...) acts like an l-value then we can get the reference of it right?
+    auto sp = &std::move(s); // error 
+  </code>
+</pre>
+
+<p>
+  The above example proves that with c++ std::move(...)'s valid category is neither an l-value nor an r-value.
 </p>
 
 <h2>Pure R-value (prvalue)</h2>
