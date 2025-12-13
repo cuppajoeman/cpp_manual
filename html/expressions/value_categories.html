@@ -6,6 +6,7 @@
   <li><code>lvalue</code></li>
 </ul>
 
+
 <h2>evolution of value categories</h2>
 
 <p>
@@ -203,3 +204,84 @@ int main() {
   <li><code>std::forward<T>(msg)</code> preserves the original value category: it forwards lvalues as lvalues and rvalues as rvalues.</li>
   <li>We now only need a single template function instead of three, keeping the code clean and maintainable.</li>
 </ul>
+
+<h2>Definitions</h2>
+<div class="definition" id="definition-lvalue">
+  <p>
+    A <strong>prvalue</strong> is an expression that is one of the following:
+  </p>
+  <ul>
+    <li>The name of a variable, a function, a template parameter object (since C++20), or a data member, regardless of type. Even if the variable's type is an rvalue reference, the expression consisting of its name is an lvalue (except move-eligible expressions).</li>
+    <li>A function call or an overloaded operator expression whose return type is an lvalue reference, such as <code>std::getline(std::cin, str)</code>, <code>str1 = str2</code>, or <code>++it</code>.</li>
+    <li>Assignment and compound assignment expressions, such as <code>a = b</code>, <code>a += b</code>, <code>a %= b</code>, etc.</li>
+    <li>Pre-increment and pre-decrement expressions, <code>++a</code> and <code>--a</code>.</li>
+    <li>The built-in indirection expression, <code>*p</code>.</li>
+    <li>Built-in subscript expressions, <code>a[n]</code> and <code>p[n]</code>, where one operand in <code>a[n]</code> is an array lvalue (since C++11).</li>
+    <li>Member of object expressions, <code>a.m</code>, except where <code>m</code> is a member enumerator or non-static member function, or where <code>a</code> is an rvalue and <code>m</code> is a non-static data member of object type.</li>
+    <li>Built-in member of pointer expressions, <code>p->m</code>, except where <code>m</code> is a member enumerator or non-static member function.</li>
+    <li>Pointer to member of object expressions, <code>a.*mp</code>, where <code>a</code> is an lvalue and <code>mp</code> is a pointer to data member.</li>
+    <li>Built-in pointer to member of pointer expressions, <code>p->*mp</code>, where <code>mp</code> is a pointer to data member.</li>
+    <li>Built-in comma expressions, <code>a, b</code>, where <code>b</code> is an lvalue.</li>
+    <li>Ternary conditional expressions, <code>a ? b : c</code>, for certain <code>b</code> and <code>c</code> (e.g., when both are lvalues of the same type).</li>
+    <li>String literals, such as <code>"Hello, world!"</code>.</li>
+    <li>Cast expressions to lvalue reference type, such as <code>static_cast&lt;int&amp;&gt;(x)</code> or <code>static_cast&lt;void(&)(int)&gt;(x)</code>.</li>
+    <li>Constant template parameters of an lvalue reference type.</li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-prvalue">
+  <p>
+    A <strong>prvalue</strong> is an expression that is one of the following:
+  </p>
+  <ul>
+    <li>A literal (except for string literal), such as <code>42</code>, <code>true</code>, or <code>nullptr</code>.</li>
+    <li>A function call or overloaded operator expression whose return type is non-reference, e.g., <code>str.substr(1, 2)</code>, <code>str1 + str2</code>, or <code>it++</code>.</li>
+    <li><code>a++</code> and <code>a--</code>, the built-in post-increment and post-decrement expressions.</li>
+    <li>Arithmetic expressions such as <code>a + b</code>, <code>a % b</code>, <code>a & b</code>, <code>a << b</code>, and other built-in arithmetic operators.</li>
+    <li>Logical expressions such as <code>a && b</code>, <code>a || b</code>, <code>!a</code>.</li>
+    <li>Comparison expressions such as <code>a < b</code>, <code>a == b</code>, <code>a >= b</code>, and others.</li>
+    <li>The built-in address-of expression <code>&a</code>.</li>
+    <li>Member expressions like <code>a.m</code> (where <code>m</code> is a member enumerator or non-static member function), <code>p->m</code>, <code>a.*mp</code> (pointer to member function), and <code>p->*mp</code>.</li>
+    <li>The built-in comma expression <code>a, b</code>, where <code>b</code> is a prvalue.</li>
+    <li>The ternary conditional expression <code>a ? b : c</code> for certain <code>b</code> and <code>c</code> (see C++ standard for details).</li>
+    <li>A cast expression to non-reference type, such as <code>static_cast&lt;double&gt;(x)</code>, <code>std::string{}</code>, or <code>(int)42</code>.</li>
+    <li>The <code>this</code> pointer.</li>
+    <li>An enumerator.</li>
+    <li>A constant template parameter of a scalar type</li>
+    <li>A lambda expression, e.g., <code>[] (int x) { return x * x; }</code> (since C++11).</li>
+    <li>A requires-expression, e.g., <code>requires (T i) { typename T::type; }</code> (since C++20).</li>
+    <li>A specialization of a concept, e.g., <code>std::equality_comparable&lt;int&gt;</code> (since C++20).</li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-xvalue">
+  <p>
+    A <strong>xvalue</strong> is an expression that is one of the following:
+  </p>
+  <ul>
+    <li><code>a.m</code>, the member of object expression, where <code>a</code> is an rvalue and <code>m</code> is a non-static data member of an object type.</li>
+    <li><code>a.*mp</code>, the pointer to member of object expression, where <code>a</code> is an rvalue and <code>mp</code> is a pointer to data member.</li>
+    <li><code>a, b</code>, the built-in comma expression, where <code>b</code> is an xvalue.</li>
+    <li><code>a ? b : c</code>, the ternary conditional expression, where either <code>b</code> or <code>c</code> is an xvalue</li>
+    <li>A function call or overloaded operator expression whose return type is an rvalue reference to object, such as <code>std::move(x)</code>.</li>
+    <li><code>a[n]</code>, the built-in subscript expression, where one operand is an array rvalue.</li>
+    <li>A cast expression to rvalue reference to object type, such as <code>static_cast<char&&&>(x)</code>.</li>
+    <li>Any expression that designates a temporary object, after temporary materialization (since C++17).</li>
+    <li>A move-eligible expression (since C++17).</li>
+  </ul>
+</div>
+      
+<div class="definition" id="definition-glvalue">
+  <p>
+    A <strong>glvalue</strong> is an expression that either an  <a class="rlink" href="/expressions/value_categories#definition-lvalue">lvalue</a> or an  <a class="rlink" href="/expressions/value_categories#definition-xvalue">xvalue</a>.
+  </p>
+</div>
+
+<div class="definition" id="definition-rvalue">
+  <p>
+    An <strong>rvalue</strong> is an expression that either an  <a class="rlink" href="/expressions/value_categories#definition-prvalue">prvalue</a> or an  <a class="rlink" href="/expressions/value_categories#definition-xvalue">xvalue</a>.
+  </p>
+</div>
+
