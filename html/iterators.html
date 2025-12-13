@@ -1,1 +1,61 @@
+<h2>Motivation</h2>
+<p>
+    Containers store data, but they do not define <em>how</em> that data should be traversed.  If you access elements directly using indices or container-specific functions, your code becomes tightly coupled to one particular container type.
+</p>
 
+<p>
+    Iterators exist to solve this problem. They provide a uniform, container-independent way to refer to elements and move through a sequence. This allows the same code to work with different container types.
+</p>
+
+<h2>Without Iterators</h2>
+<p>
+    Here, traversal logic is tied directly to the container:
+</p>
+
+<pre><code>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> values = {1, 2, 3, 4};
+
+    for (std::size_t i = 0; i < values.size(); ++i) {
+        std::cout << values[i] << " ";
+    }
+}
+</code></pre>
+
+<p>
+This approach works for <code>std::vector</code>, but it cannot be reused for containers
+like <code>std::list</code>, which do not support indexing.
+</p>
+
+<h2>With Iterators</h2>
+<p>
+    Iterators decouple traversal from the container’s internal structure:
+</p>
+
+<pre><code>
+#include <vector>
+#include <list>
+#include <iostream>
+
+template <typename Iterator>
+void print_range(Iterator begin, Iterator end) {
+    for (Iterator it = begin; it != end; ++it) {
+        std::cout << *it << " ";
+    }
+}
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4};
+    std::list<int> lst = {5, 6, 7, 8};
+
+    print_range(vec.begin(), vec.end());
+    print_range(lst.begin(), lst.end());
+}
+</code></pre>
+
+<p>
+    The same function works for both containers because it relies only on the iterator interface. This is the core motivation for pure iterators: enabling generic, reusable code that operates on sequences rather than concrete container types.
+</p>
