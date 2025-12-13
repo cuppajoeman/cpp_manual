@@ -1,1 +1,152 @@
+<div class="definition" id="definition-move-constructible">
+  We say that a type <code>T</code> is <b>MoveConstructible</b> when the following is true:
+  <table>
+    <thead>
+      <tr>
+        <th>Expression</th>
+        <th>Post-conditions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>T u = rv;</code></td>
+        <td>
+          The value of <code>u</code> is equivalent to the value of <code>rv</code> before the initialization.
+          <br><br>
+          The new value of <code>rv</code> is unspecified.
+        </td>
+      </tr>
+      <tr>
+        <td><code>T(rv)</code></td>
+        <td>
+          The value of <code>T(rv)</code> is equivalent to the value of <code>rv</code> before the initialization.
+          <br><br>
+          The new value of <code>rv</code> is unspecified.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
+<div class="definition" id="definition-copy-assignable">
+  We say that a type <code>T</code> is <b>CopyAssignable</b> when the following is true:
+  <ul>
+        <li>The type <code>T</code> satisfies <a class="rlink" href="/named_requirements/value_semantics.html#definition-move-assignable"><b>MoveAssignable</b></a>.</li>
+  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Expression</th>
+        <th>Return type</th>
+        <th>Return value</th>
+        <th>Post-conditions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>t = v</code></td>
+        <td><code>T&</code></td>
+        <td><code>t</code></td>
+        <td>
+          The value of <code>t</code> is equivalent to the value of <code>v</code>.
+          <br><br>
+          The value of <code>v</code> is unchanged.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="definition" id="definition-copy-constructible">
+  We say that a type <code>T</code> is <b>CopyConstructible</b> when the following is true:
+  <ul>
+        <li>The type <code>T</code> satisfies <a class="rlink" href="/named_requirements/value_semantics.html#definition-move-constructible"><b>MoveConstructible</b></a>.</li>
+  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Expression</th>
+        <th>Post-conditions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>T u = v;</code></td>
+        <td>
+          The value of <code>u</code> is equivalent to the value of <code>v</code>.
+          <br><br>
+          The value of <code>v</code> is unchanged.
+        </td>
+      </tr>
+      <tr>
+        <td><code>T(v)</code></td>
+        <td>
+          The value of <code>T(v)</code> is equivalent to the value of <code>v</code>.
+          <br><br>
+          The value of <code>v</code> is unchanged.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Additionally, the xpression <code>v.~T()</code> must be valid, and for lvalue <code>v</code>, 
+    the expression <code>&v</code> must have type <code>T*</code> or <code>const T*</code> 
+    and evaluate to the address of <code>v</code>.
+  </p>
+</div>
+
+
+<div class="definition" id="definition-move-assignable">
+  We say that a type <code>T</code> is <b>MoveAssignable</b> when the following is true:
+  <table>
+    <thead>
+      <tr>
+        <th>Expression</th>
+        <th>Return type</th>
+        <th>Return value</th>
+        <th>Post-conditions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>t = rv</code></td>
+        <td><code>T&</code></td>
+        <td><code>t</code></td>
+        <td>
+          If <code>t</code> and <code>rv</code> do not refer to the same object,
+          the value of <code>t</code> is equivalent to the value of <code>rv</code>
+          before the assignment.
+          <br><br>
+          The new value of <code>rv</code> is unspecified.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div id="definition-default-constructible">
+    We say that a type T is <b>DefaultConstructible</b> when the following is true:
+    <table>
+      <thead>
+        <tr>
+          <th>Expression</th>
+          <th>Post-condition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>T t;</code></td>
+          <td>object <code>t</code> is default-initialized</td>
+        </tr>
+        <tr>
+          <td><code>T u{};</code></td>
+          <td>object <code>u</code> is value-initialized or aggregate-initialized</td>
+        </tr>
+        <tr>
+          <td><code>T()</code><br><code>T{}</code></td>
+          <td>an object of type <code>T</code> is value-initialized or aggregate-initialized</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
