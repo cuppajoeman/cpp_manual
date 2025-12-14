@@ -12,20 +12,19 @@
         <td><code>T u = rv;</code></td>
         <td>
           The value of <code>u</code> is equivalent to the value of <code>rv</code> before the initialization.
-          <br><br>
-          The new value of <code>rv</code> is unspecified.
         </td>
       </tr>
       <tr>
         <td><code>T(rv)</code></td>
         <td>
           The value of <code>T(rv)</code> is equivalent to the value of <code>rv</code> before the initialization.
-          <br><br>
-          The new value of <code>rv</code> is unspecified.
         </td>
       </tr>
     </tbody>
   </table>
+  <p>
+    Note that there is no condition on the value of <code>rv</code> after these operations
+  </p>
 </div>
 
 <div class="definition" id="definition-copy-assignable">
