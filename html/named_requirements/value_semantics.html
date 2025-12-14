@@ -1,4 +1,15 @@
 <div class="definition" id="definition-move-constructible">
+  <h2 class="line-text">MoveConstructible</h2>
+
+  Suppose that 
+
+  <ul>
+    <li><code>T</code> is a object or reference type to be supplied by a c++ program instantiating a template</li>
+    <li><code>u</code> denotes an identifier</li>
+    <li><code>rv</code> denotes an <a class="rlink" href="/expressions/value_categories.html#definition-rvalue">rvalue</a> of type T</li>
+  </ul>
+
+  
   We say that a type <code>T</code> is <b>MoveConstructible</b> when the following is true:
   <table>
     <thead>
@@ -28,10 +39,17 @@
 </div>
 
 <div class="definition" id="definition-copy-assignable">
-  We say that a type <code>T</code> is <b>CopyAssignable</b> when the following is true:
+
+  <h2 class="line-text">CopyAssignable</h2>
+
+  Suppose that:
   <ul>
-        <li>The type <code>T</code> satisfies <a class="rlink" href="/named_requirements/value_semantics.html#definition-move-assignable"><b>MoveAssignable</b></a>.</li>
+    <li><code>T</code> is a object or reference type to be supplied by a c++ program instantiating a template</li>
+    <li><code>u</code> denotes an identifier</li>
+    <li><code>v</code> denotes an <a class="rlink" href="/expressions/value_categories.html#definition-lvalue">lvalue</a> of type (possibly const) T or an <a class="rlink" href="/expressions/value_categories.html#definition-rvalue">rvalue</a> of type const T.</li>
   </ul>
+
+  We say that a type <code>T</code> is <b>CopyAssignable</b> when the following is true:
   <table>
     <thead>
       <tr>
@@ -57,9 +75,19 @@
 </div>
 
 <div class="definition" id="definition-copy-constructible">
+
+  <h2 class="line-text">CopyConstructible</h2>
+
+  Suppose that:
+  <ul>
+    <li><code>T</code> is a object or reference type to be supplied by a c++ program instantiating a template</li>
+    <li><code>u</code> denotes an identifier</li>
+    <li><code>v</code> denotes an <a class="rlink" href="/expressions/value_categories.html#definition-lvalue">lvalue</a> of type (possibly const) T or an <a class="rlink" href="/expressions/value_categories.html#definition-rvalue">rvalue</a> of type const T.</li>
+  </ul>
+
   We say that a type <code>T</code> is <b>CopyConstructible</b> when the following is true:
   <ul>
-        <li>The type <code>T</code> satisfies <a class="rlink" href="/named_requirements/value_semantics.html#definition-move-constructible"><b>MoveConstructible</b></a>.</li>
+        <li>The type <code>T</code> is <a class="rlink" href="/named_requirements/value_semantics.html#definition-move-constructible"><b>MoveConstructible</b></a>.</li>
   </ul>
   <table>
     <thead>

@@ -118,4 +118,22 @@ input[type="submit"] {
 
 .definition {
     border: 1px solid var(--table-border-color);
- }
+    padding: 1em;       /* inner spacing */
+    margin: 1em 0;      /* space outside the box */
+    border-radius: 6px; /* optional rounded corners */
+}
+
+.line-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.5em;  /* spacing from content */
+}
+
+.line-text::before,
+.line-text::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--table-border-color);
+    margin: 0 0.5em;
+}
