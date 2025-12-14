@@ -1,0 +1,151 @@
+
+<h2>Types</h2>
+<ul>
+    <li><strong>float_t</strong> (C++11): most efficient floating-point type at least as wide as float (typedef)</li>
+    <li><strong>double_t</strong> (C++11): most efficient floating-point type at least as wide as double (typedef)</li>
+</ul>
+
+<h2>Macros</h2>
+<ul>
+    <li>HUGE_VALF / HUGE_VAL / HUGE_VALL (C++11): indicates the overflow value for float, double and long double respectively</li>
+    <li>INFINITY (C++11): evaluates to positive infinity or the value guaranteed to overflow a float</li>
+    <li>NAN (C++11): evaluates to a quiet NaN of type float</li>
+    <li>math_errhandling / MATH_ERR / NOMATH_ERREXCEPT (C++11): defines the error handling mechanism used by the common mathematical functions</li>
+</ul>
+
+<h2>Classification</h2>
+<ul>
+    <li>FP_NORMAL / FP_SUBNORMAL / FP_ZERO / FP_INFINITE / FP_NAN (C++11): indicates a floating-point category</li>
+</ul>
+
+<h2>Functions</h2>
+
+<h3>Basic operations</h3>
+<ul>
+    <li>abs, fabs, fabsf, fabsl (C++11): absolute value of a floating point value (|x|)</li>
+    <li>fmod, fmodf, fmodl (C++11): remainder of the floating point division operation</li>
+    <li>remainder, remainderf, remainderl (C++11): signed remainder of the division operation</li>
+    <li>remquo, remquof, remquol (C++11): signed remainder and the three last bits of the division operation</li>
+    <li>fma, fmaf, fmal (C++11): fused multiply-add operation</li>
+    <li>fmax, fmaxf, fmaxl (C++11): larger of two floating-point values</li>
+    <li>fmin, fminf, fminl (C++11): smaller of two floating-point values</li>
+    <li>fdim, fdimf, fdiml (C++11): positive difference of two floating-point values (max(0, x-y))</li>
+    <li>nan, nanf, nanl (C++11): not-a-number (NaN)</li>
+</ul>
+
+<h3>Linear interpolation</h3>
+<ul>
+    <li>lerp (C++20): linear interpolation function</li>
+</ul>
+
+<h3>Exponential functions</h3>
+<ul>
+    <li>exp, expf, expl (C++11): returns e raised to the given power (e^x)</li>
+    <li>exp2, exp2f, exp2l (C++11): returns 2 raised to the given power (2^x)</li>
+    <li>expm1, expm1f, expm1l (C++11): returns e raised to the given power minus 1 (e^x - 1)</li>
+    <li>log, logf, logl (C++11): computes natural (base e) logarithm (ln(x))</li>
+    <li>log10, log10f, log10l (C++11): computes common (base 10) logarithm (log10(x))</li>
+    <li>log2, log2f, log2l (C++11): base 2 logarithm of the given number (log2(x))</li>
+    <li>log1p, log1pf, log1pl (C++11): natural logarithm (to base e) of 1 plus the given number (ln(1+x))</li>
+</ul>
+
+<h3>Power functions</h3>
+<ul>
+    <li>pow, powf, powl (C++11): raises a number to the given power (x^y)</li>
+    <li>sqrt, sqrtf, sqrtl (C++11): computes square root (√x)</li>
+    <li>cbrt, cbrtf, cbrtl (C++11): computes cube root (3√x)</li>
+    <li>hypot, hypotf, hypotl (C++11): computes hypotenuse √(x²+y²) and √(x²+y²+z²) (since C++17)</li>
+</ul>
+
+<h3>Trigonometric functions</h3>
+<ul>
+    <li>sin, sinf, sinl (C++11): computes sine (sin(x))</li>
+    <li>cos, cosf, cosl (C++11): computes cosine (cos(x))</li>
+    <li>tan, tanf, tanl (C++11): computes tangent (tan(x))</li>
+    <li>asin, asinf, asinl (C++11): computes arc sine (arcsin(x))</li>
+    <li>acos, acosf, acosl (C++11): computes arc cosine (arccos(x))</li>
+    <li>atan, atanf, atanl (C++11): computes arc tangent (arctan(x))</li>
+    <li>atan2, atan2f, atan2l (C++11): arc tangent, using signs to determine quadrants</li>
+</ul>
+
+<h3>Hyperbolic functions</h3>
+<ul>
+    <li>sinh, sinhf, sinhl (C++11): computes hyperbolic sine (sinh(x))</li>
+    <li>cosh, coshf, coshl (C++11): computes hyperbolic cosine (cosh(x))</li>
+    <li>tanh, tanhf, tanhl (C++11): computes hyperbolic tangent (tanh(x))</li>
+    <li>asinh, asinhf, asinhl (C++11): computes the inverse hyperbolic sine (arsinh(x))</li>
+    <li>acosh, acoshf, acoshl (C++11): computes the inverse hyperbolic cosine (arcosh(x))</li>
+    <li>atanh, atanhf, atanhl (C++11): computes the inverse hyperbolic tangent (artanh(x))</li>
+</ul>
+
+<h3>Error and gamma functions</h3>
+<ul>
+    <li>erf, erff, erfl (C++11): error function</li>
+    <li>erfc, erfcf, erfcl (C++11): complementary error function</li>
+    <li>tgamma, tgammaf, tgammal (C++11): gamma function</li>
+    <li>lgamma, lgammaf, lgammal (C++11): natural logarithm of the gamma function</li>
+</ul>
+
+<h3>Nearest integer floating-point operations</h3>
+<ul>
+    <li>ceil, ceilf, ceill (C++11): nearest integer not less than the given value</li>
+    <li>floor, floorf, floorl (C++11): nearest integer not greater than the given value</li>
+    <li>trunc, truncf, truncl (C++11): nearest integer not greater in magnitude than the given value</li>
+    <li>round, roundf, roundl, roundll, roundfl, roundlll, roundfll, roundllf, roundl (C++11): nearest integer, rounding away from zero in halfway cases</li>
+    <li>nearbyint, nearbyintf, nearbyintl (C++11): nearest integer using current rounding mode</li>
+    <li>rint, rintf, rintl, lrint, lrintf, lrintl, llrint, llrintf, llrintl (C++11): nearest integer using current rounding mode with exception if the result differs</li>
+</ul>
+
+<h3>Floating-point manipulation functions</h3>
+<ul>
+    <li>frexp, frexpf, frexpl (C++11): decomposes a number into significand and base-2 exponent</li>
+    <li>ldexp, ldexpf, ldexpl (C++11): multiplies a number by 2 raised to an integral power</li>
+    <li>modf, modff, modfl (C++11): decomposes a number into integer and fractional parts</li>
+    <li>scalbn, scalbnf, scalbnl, scalbln, scalblnf, scalblnl (C++11): multiplies a number by FLT_RADIX raised to a power</li>
+    <li>ilogb, ilogbf, ilogbl (C++11): extracts exponent of the number</li>
+    <li>logb, logbf, logbl (C++11): extracts exponent of the number</li>
+    <li>nextafter, nextafterf, nextafterl, nexttoward, nexttowardf, nexttowardl (C++11): next representable floating-point value towards the given value</li>
+    <li>copysign, copysignf, copysignl (C++11): copies the sign of a floating point value</li>
+</ul>
+
+<h3>Classification and comparison</h3>
+<ul>
+    <li>fpclassify (C++11): categorizes the given floating-point value</li>
+    <li>isfinite (C++11): checks if the given number has finite value</li>
+    <li>isinf (C++11): checks if the given number is infinite</li>
+    <li>isnan (C++11): checks if the given number is NaN</li>
+    <li>isnormal (C++11): checks if the given number is normal</li>
+    <li>signbit (C++11): checks if the given number is negative</li>
+    <li>isgreater (C++11): checks if the first floating-point argument is greater than the second</li>
+    <li>isgreaterequal (C++11): checks if the first floating-point argument is greater or equal than the second</li>
+    <li>isless (C++11): checks if the first floating-point argument is less than the second</li>
+    <li>islessequal (C++11): checks if the first floating-point argument is less or equal than the second</li>
+    <li>islessgreater (C++11): checks if the first floating-point argument is less or greater than the second</li>
+    <li>isunordered (C++11): checks if two floating-point values are unordered</li>
+</ul>
+
+<h3>Mathematical special functions (C++17)</h3>
+<ul>
+    <li>assoc_laguerre, assoc_laguerref, assoc_laguerrel: associated Laguerre polynomials</li>
+    <li>assoc_legendre, assoc_legendref, assoc_legendrel: associated Legendre polynomials</li>
+    <li>beta, betaf, betal: beta function</li>
+    <li>comp_ellint_1, comp_ellint_1f, comp_ellint_1l: complete elliptic integral of the first kind</li>
+    <li>comp_ellint_2, comp_ellint_2f, comp_ellint_2l: complete elliptic integral of the second kind</li>
+    <li>comp_ellint_3, comp_ellint_3f, comp_ellint_3l: complete elliptic integral of the third kind</li>
+    <li>cyl_bessel_i, cyl_bessel_if, cyl_bessel_il: regular modified cylindrical Bessel functions</li>
+    <li>cyl_bessel_j, cyl_bessel_jf, cyl_bessel_jl: cylindrical Bessel functions (of the first kind)</li>
+    <li>cyl_bessel_k, cyl_bessel_kf, cyl_bessel_kl: irregular modified cylindrical Bessel functions</li>
+    <li>cyl_neumann, cyl_neumannf, cyl_neumannl: cylindrical Neumann functions</li>
+    <li>ellint_1, ellint_1f, ellint_1l: incomplete elliptic integral of the first kind</li>
+    <li>ellint_2, ellint_2f, ellint_2l: incomplete elliptic integral of the second kind</li>
+    <li>ellint_3, ellint_3f, ellint_3l: incomplete elliptic integral of the third kind</li>
+    <li>expint, expintf, expintl: exponential integral</li>
+    <li>hermite, hermitef, hermitel: Hermite polynomials</li>
+    <li>legendre, legendref, legendrel: Legendre polynomials</li>
+    <li>laguerre, laguerref, laguerrel: Laguerre polynomials</li>
+    <li>riemann_zeta, riemann_zetaf, riemann_zetal: Riemann zeta function</li>
+    <li>sph_bessel, sph_besself, sph_bessell: spherical Bessel functions (of the first kind)</li>
+    <li>sph_legendre, sph_legendref, sph_legendrel: spherical associated Legendre functions</li>
+    <li>sph_neumann, sph_neumannf, sph_neumannl: spherical Neumann functions</li>
+</ul>
+
