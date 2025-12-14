@@ -1,1 +1,150 @@
+<h1>Usage</h1>
+<details>
+    <h2>Include Header</h2>
+    <pre><code>#include <chrono></code></pre>
+    <h2>Duration</h2>
+    <pre><code>
+std::chrono::duration<int, std::milli> d(500);  // 500 milliseconds
+std::chrono::seconds s(5);                          // 5 seconds
+std::chrono::minutes m = std::chrono::minutes(2);  // 2 minutes
+</code></pre>
+    <h2>Arithmetic on Durations</h2>
+    <pre><code>
+auto total = s + std::chrono::seconds(10);   // Add durations
+auto diff  = m - std::chrono::minutes(1);    // Subtract durations
+auto mul   = s * 2;                          // Multiply
+auto div   = m / 2;                          // Divide
+</code></pre>
+    <h2>Accessing Duration Count</h2>
+    <pre><code>
+auto count = s.count();  // Returns the stored integer (5 in this case)
+</code></pre>
+    <h2>Time Point</h2>
+    <pre><code>
+auto now = std::chrono::system_clock::now();          // Current time
+std::chrono::time_point<std::chrono::system_clock> tp(now);
+    </code></pre>
+    <h2>Time Point Arithmetic</h2>
+    <pre><code>
+auto future = now + std::chrono::hours(1);          // Add duration
+auto past   = now - std::chrono::minutes(30);      // Subtract duration
+auto diff   = future - past;                        // Duration between two time points
+</code></pre>
+    <h2>Conversions</h2>
+    <pre><code>
+auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(diff);
+auto sec = std::chrono::duration_cast<std::chrono::seconds>(diff);
+    </code></pre>
+    <h2>Sleep</h2>
+    <pre><code>
+std::this_thread::sleep_for(std::chrono::seconds(1));   // Sleep for 1 second
+std::this_thread::sleep_until(now + std::chrono::minutes(1));  // Sleep until a specific time
+    </code></pre>
+</details>
+<h1>declaration</h1>
+<pre> <code> namespace std::chrono {
 
+template<class Rep, class Period = std::ratio<1>> class duration;
+
+template<class Clock, class Duration = typename Clock::duration> class time_point;
+
+struct system_clock;
+struct steady_clock;
+struct high_resolution_clock;
+
+} // namespace std::chrono
+</code>
+</pre>
+<h2>member types</h2>
+<table border="1" cellpadding="4" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Member type</th>
+            <th>Definition</th>
+            <th>Explanation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>rep</td>
+            <td>Rep</td>
+            <td>Underlying arithmetic type used to store duration count.</td>
+        </tr>
+        <tr>
+            <td>period</td>
+            <td>Period</td>
+            <td>Ratio representing the tick period (e.g., std::milli, std::ratio<1>).</td>
+        </tr>
+        <tr>
+            <td>duration</td>
+            <td>duration<Rep, Period></td>
+            <td>Type of this duration.</td>
+        </tr>
+        <tr>
+            <td>time_point</td>
+            <td>time_point<Clock, Duration></td>
+            <td>Represents a point in time from a given clock.</td>
+        </tr>
+    </tbody>
+</table>
+<h1>member functions</h1>
+<h2>duration</h2>
+<ul>
+    <li>
+        <code>rep count() const</code> 
+        <p>Returns the stored tick count.</p>
+    </li>
+    <li>
+        <code>duration operator+(const duration&amp; rhs) const</code> 
+        <p>Add two durations.</p>
+    </li>
+    <li>
+        <code>duration operator-(const duration&amp; rhs) const</code> 
+        <p>Subtract two durations.</p>
+    </li>
+    <li>
+        <code>duration operator*(Rep scalar) const</code> 
+        <p>Multiply duration by a scalar.</p>
+    </li>
+    <li>
+        <code>duration operator/(Rep scalar) const</code> 
+        <p>Divide duration by a scalar.</p>
+    </li>
+</ul>
+<h2>time_point</h2>
+<ul>
+    <li>
+        <code>time_point operator+(const duration<Rep, Period>&amp; d) const</code> 
+        <p>Return new time point offset by duration d.</p>
+    </li>
+    <li>
+        <code>time_point operator-(const duration<Rep, Period>&amp; d) const</code> 
+        <p>Return new time point offset backward by duration d.</p>
+    </li>
+    <li>
+        <code>duration<Rep, Period> operator-(const time_point&amp; t) const</code> 
+        <p>Return duration between two time points.</p>
+    </li>
+</ul>
+<h2>clocks</h2>
+<ul>
+    <li>
+        <code>system_clock::time_point now()</code> 
+        <p>Returns current system time.</p>
+    </li>
+    <li>
+        <code>steady_clock::time_point now()</code> 
+        <p>Returns monotonic clock time, suitable for measuring intervals.</p>
+    </li>
+    <li>
+        <code>high_resolution_clock::time_point now()</code> 
+        <p>Returns the highest-resolution clock available.</p>
+    </li>
+</ul>
+<h2>utilities</h2>
+<ul>
+    <li>
+        <code>template<class ToDuration, class Rep, class Period> ToDuration duration_cast(const duration<Rep, Period>&amp; d)</code> 
+        <p>Convert a duration to a different period type.</p>
+    </li>
+</ul>
