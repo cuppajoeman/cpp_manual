@@ -15,6 +15,26 @@
     For example, a large array with more than the maximum value of <code>unsigned int</code> would make the program have undefined behavior.
 </p>
 
+<p>
+    This is the reason why you'll see for loops that use size_t rather than int or unsigned int, as .size() of a vector returns a size_t and thus the value could be larger than the largest int or unsigned int causing the variable i to overflow during loop iterations depending on the platform.
+</p>
+
+<pre>
+    <code>
+size_t count = ...; // a value larger than an int
+std::vector<int> vec(count); 
+// bad: i will overflow on a platform where vec.size() > INT_MAX 
+for (int i = 0; i < vec.size(); ++i) { 
+    vec[i] = 42; 
+}
+                      
+// good: our index will never overflow
+for (size_t i = 0; i < vec.size(); ++i) { 
+    vec[i] = 42; 
+}
+    </code>
+</pre>
+
 <h2>The Role of <code>size_t</code></h2>
 <p>
     <code>size_t</code> is guaranteed to be large enough to represent the size of any object or array in memory. On 64-bit systems, it is typically 64 bits.
