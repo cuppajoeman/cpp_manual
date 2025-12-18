@@ -1,0 +1,46 @@
+<h2>References to elements of a vector</h2>
+<p>
+  When using references it's important to note that if the reference is pointing to a place in a vector that that reference may get invalidated if the vector has to reallocate, see this:
+</p>
+<pre>
+  <code>
+#include <iostream>
+#include <vector>
+
+struct MyStruct {
+    int value;
+};
+
+int main() {
+    std::vector<MyStruct> vec;
+
+    // add one element
+    vec.push_back({42});
+
+    // get a reference to the first element
+    MyStruct& ref = vec[0];
+    std::cout << "Before adding more elements, ref.value = " << ref.value << std::endl;
+
+    // add more elements, likely causing reallocation
+    for (int i = 0; i < 1000; ++i) {
+        vec.push_back({i});
+    }
+
+    // the reference may now be invalid!
+    std::cout << "After adding more elements, ref.value = " << ref.value << " (undefined behavior!)" << std::endl;
+
+    return 0;
+}
+  </code>
+</pre>
+
+<p>
+  On my system the result of the above code is this:
+</p>
+
+<pre>
+  <code>
+Before adding more elements, ref.value = 42
+After adding more elements, ref.value = -1170156367 (undefined behavior!)
+  </code>
+</pre>
