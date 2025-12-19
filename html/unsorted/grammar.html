@@ -1,0 +1,145 @@
+<div class="definition" id="definition-nondigit">
+  <h2 class="line-text">nondigit</h2>
+  <p>
+    We say that a string s is a nondigit when it is one of the following characters:
+  </p>
+  <table>
+    <tr>
+      <td>a</td><td>b</td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td>
+      <td>i</td><td>j</td><td>k</td><td>l</td><td>m</td>
+    </tr>
+    <tr>
+      <td>n</td><td>o</td><td>p</td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td>
+      <td>v</td><td>w</td><td>x</td><td>y</td><td>z</td>
+    </tr>
+    <tr>
+      <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td>
+      <td>I</td><td>J</td><td>K</td><td>L</td><td>M</td>
+    </tr>
+    <tr>
+      <td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td>
+      <td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>_</td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="definition" id="definition-digit">
+  <h2 class="line-text">digit</h2>
+  <p>
+    We say that a string s is a digit when it is one of the following characters:
+  </p>
+  <table>
+    <tr>
+      <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+      <td>6</td><td>7</td><td>8</td><td>9</td>
+    </tr>
+  </table>
+</div>
+
+
+
+<div class="definition" id="definition-identifier-start">
+  <h2 class="line-text">identifier-start</h2>
+  <p>
+    We say that a string s is an identifier-start when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-nondigit">nondigit</a></li>
+  </ul>
+</div>
+
+<div class="definition" id="definition-identifier-continue">
+  <h2 class="line-text">identifier-continue</h2>
+  <p>
+    We say that a string s is an identifier-continue when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-digit">digit</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-nondigit">nondigit</a></li>
+    <li>
+      an element of the translation character set with the Unicode property
+      <code>XID_Continue</code>
+    </li>
+  </ul>
+</div>
+
+<div class="definition" id="definition-operator">
+  <h2 class="line-text">operator</h2>
+  <p>
+    We say that a string s is an operator when it is any of the following:
+  </p>
+  <table>
+    <tr><td>new</td><td>delete</td><td>new[]</td><td>delete[]</td></tr>
+    <tr><td>co_await</td><td>( )</td><td>[ ]</td><td>-&gt;</td></tr>
+    <tr><td>-&gt;*</td><td>~</td><td>!</td><td>+</td></tr>
+    <tr><td>-</td><td>*</td><td>/</td><td>%</td></tr>
+    <tr><td>^</td><td>&amp;</td><td>|</td><td>=</td></tr>
+    <tr><td>+=</td><td>-=</td><td>*=</td><td>/=</td></tr>
+    <tr><td>%=</td><td>^=</td><td>&amp;=</td><td>|=</td></tr>
+    <tr><td>==</td><td>!=</td><td>&lt;</td><td>&gt;</td></tr>
+    <tr><td>&lt;=</td><td>&gt;=</td><td>&lt;=&gt;</td><td>&amp;&amp;</td></tr>
+    <tr><td>||</td><td>&lt;&lt;</td><td>&gt;&gt;</td><td>&lt;&lt;=</td></tr>
+    <tr><td>&gt;&gt;=</td><td>++</td><td>--</td><td>,</td></tr>
+  </table>
+</div>
+
+<div class="definition" id="definition-operator-function-id">
+  <h2 class="line-text">operator-function-id</h2>
+  <p>
+    We say that a string s is an operator-function-id when it is any of the following:
+  </p>
+  <ul>
+    <li>
+      <code>operator</code> <a class="rlink" href="/unsorted/grammar#definition-operator">operator</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-identifier">
+  <h2 class="line-text">identifier</h2>
+  <p>
+    We say that a string s is an identifier when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-identifier-start">identifier-start</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a>
+      <a class="rlink" href="/unsorted/grammar#definition-identifier-continue">identifier-continue</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-unqualified-id">
+  <h2 class="line-text">unqualified-id</h2>
+  <p>
+    We say that a string s is an unqualified-id when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-operator-function-id">operator-function-id</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-conversion-function-id">conversion-function-id</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-literal-operator-id">literal-operator-id</a></li>
+    <li><code>~</code> <a class="rlink" href="/unsorted/grammar#definition-type-name">type-name</a></li>
+    <li><code>~</code> <a class="rlink" href="/unsorted/grammar#definition-computed-type-specifier">computed-type-specifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-template-id">template-id</a></li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-id-expression">
+  <h2 class="line-text">id-expression</h2>
+  <p>
+    We say that a string s is an id-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-unqualified-id">unqualified-id</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-qualified-id">qualified-id</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-pack-index-expression">pack-index-expression</a></li>
+    <li></li>
+  </ul>
+</div>
