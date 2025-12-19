@@ -38,6 +38,441 @@
 </div>
 
 
+<div class="definition" id="definition-integer-literal">
+  <h2 class="line-text">integer-literal</h2>
+  <p>
+    We say that a string s is an integer-literal when it is any of the following:
+  </p>
+  <ul>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-binary-literal">binary-literal</a>
+      <a class="rlink" href="/unsorted/grammar#definition-integer-suffixopt">integer-suffix<code>opt</code></a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-octal-literal">octal-literal</a>
+      <a class="rlink" href="/unsorted/grammar#definition-integer-suffixopt">integer-suffix<code>opt</code></a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-decimal-literal">decimal-literal</a>
+      <a class="rlink" href="/unsorted/grammar#definition-integer-suffixopt">integer-suffix<code>opt</code></a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-hexadecimal-literal">hexadecimal-literal</a>
+      <a class="rlink" href="/unsorted/grammar#definition-integer-suffix">integer-suffix</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-primary-expression">
+  <h2 class="line-text">primary-expression</h2>
+  <p>
+    We say that a string s is a primary-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-literal">literal</a></li>
+    <li>this</li>
+    <li>( <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> )</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-id-expression">id-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-lambda-expression">lambda-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-fold-expression">fold-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-requires-expression">requires-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-splice-expression">splice-expression</a></li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-postfix-expression">
+  <h2 class="line-text">postfix-expression</h2>
+  <p>
+    We say that a string s is a postfix-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-primary-expression">primary-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a>
+      [ <a class="rlink" href="/unsorted/grammar#definition-expression-listopt">expression-list<code>opt</code></a> ]
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a>
+      ( <a class="rlink" href="/unsorted/grammar#definition-expression-listopt">expression-list<code>opt</code></a> )
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-simple-type-specifier">simple-type-specifier</a>
+      ( <a class="rlink" href="/unsorted/grammar#definition-expression-listopt">expression-list<code>opt</code></a> )
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-typename-specifier">typename-specifier</a>
+      ( <a class="rlink" href="/unsorted/grammar#definition-expression-listopt">expression-list<code>opt</code></a> )
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-simple-type-specifier">simple-type-specifier</a>
+      <a class="rlink" href="/unsorted/grammar#definition-braced-init-list">braced-init-list</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-typename-specifier">typename-specifier</a>
+      <a class="rlink" href="/unsorted/grammar#definition-braced-init-list">braced-init-list</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a>
+      .
+      template<code>opt</code>
+      <a class="rlink" href="/unsorted/grammar#definition-id-expression">id-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a>
+      .
+      <a class="rlink" href="/unsorted/grammar#definition-splice-expression">splice-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a>
+      -&gt;
+      template<code>opt</code>
+      <a class="rlink" href="/unsorted/grammar#definition-id-expression">id-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a>
+      -&gt;
+      <a class="rlink" href="/unsorted/grammar#definition-splice-expression">splice-expression</a>
+    </li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a> ++</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a> --</li>
+    <li>dynamic_cast &lt; <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> &gt; ( <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> )</li>
+    <li>static_cast &lt; <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> &gt; ( <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> )</li>
+    <li>reinterpret_cast &lt; <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> &gt; ( <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> )</li>
+    <li>const_cast &lt; <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> &gt; ( <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> )</li>
+    <li>typeid ( <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> )</li>
+    <li>typeid ( <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> )</li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-unary-expression">
+  <h2 class="line-text">unary-expression</h2>
+  <p>
+    We say that a string s is a unary-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-postfix-expression">postfix-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-unary-operator">unary-operator</a> <a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a></li>
+    <li>++ <a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a></li>
+    <li>-- <a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-await-expression">await-expression</a></li>
+    <li>sizeof <a class="rlink" href="/unsorted/grammar#definition-unary-expression">unary-expression</a></li>
+    <li>sizeof ( <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> )</li>
+    <li>sizeof ... ( <a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a> )</li>
+    <li>alignof ( <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> )</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-noexcept-expression">noexcept-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-new-expression">new-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-delete-expression">delete-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-reflect-expression">reflect-expression</a></li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-cast-expression">
+  <h2 class="line-text">cast-expression</h2>
+  <p>
+    We say that a string s is a cast-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-unary-expression">unary-expression</a></li>
+    <li>
+      ( <a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a> )
+      <a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-pm-expression">
+  <h2 class="line-text">pm-expression</h2>
+  <p>
+    We say that a string s is a pm-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-pm-expression">pm-expression</a>
+      .*
+      <a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-pm-expression">pm-expression</a>
+      -&gt;*
+      <a class="rlink" href="/unsorted/grammar#definition-cast-expression">cast-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-multiplicative-expression">
+  <h2 class="line-text">multiplicative-expression</h2>
+  <p>
+    We say that a string s is a multiplicative-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-pm-expression">pm-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-multiplicative-expression">multiplicative-expression</a>
+      *
+      <a class="rlink" href="/unsorted/grammar#definition-pm-expression">pm-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-multiplicative-expression">multiplicative-expression</a>
+      /
+      <a class="rlink" href="/unsorted/grammar#definition-pm-expression">pm-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-multiplicative-expression">multiplicative-expression</a>
+      %
+      <a class="rlink" href="/unsorted/grammar#definition-pm-expression">pm-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-additive-expression">
+  <h2 class="line-text">additive-expression</h2>
+  <p>
+    We say that a string s is an additive-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-multiplicative-expression">multiplicative-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-additive-expression">additive-expression</a>
+      +
+      <a class="rlink" href="/unsorted/grammar#definition-multiplicative-expression">multiplicative-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-additive-expression">additive-expression</a>
+      -
+      <a class="rlink" href="/unsorted/grammar#definition-multiplicative-expression">multiplicative-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-shift-expression">
+  <h2 class="line-text">shift-expression</h2>
+  <p>
+    We say that a string s is a shift-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-additive-expression">additive-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-shift-expression">shift-expression</a>
+      &lt;&lt;
+      <a class="rlink" href="/unsorted/grammar#definition-additive-expression">additive-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-shift-expression">shift-expression</a>
+      &gt;&gt;
+      <a class="rlink" href="/unsorted/grammar#definition-additive-expression">additive-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-compare-expression">
+  <h2 class="line-text">compare-expression</h2>
+  <p>
+    We say that a string s is a compare-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-shift-expression">shift-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-compare-expression">compare-expression</a>
+      &lt;=&gt;
+      <a class="rlink" href="/unsorted/grammar#definition-shift-expression">shift-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-relational-expression">
+  <h2 class="line-text">relational-expression</h2>
+  <p>
+    We say that a string s is a relational-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-compare-expression">compare-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a>
+      &lt;
+      <a class="rlink" href="/unsorted/grammar#definition-compare-expression">compare-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a>
+      &gt;
+      <a class="rlink" href="/unsorted/grammar#definition-compare-expression">compare-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a>
+      &lt;=
+      <a class="rlink" href="/unsorted/grammar#definition-compare-expression">compare-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a>
+      &gt;=
+      <a class="rlink" href="/unsorted/grammar#definition-compare-expression">compare-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-equality-expression">
+  <h2 class="line-text">equality-expression</h2>
+  <p>
+    We say that a string s is an equality-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-equality-expression">equality-expression</a>
+      ==
+      <a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-equality-expression">equality-expression</a>
+      !=
+      <a class="rlink" href="/unsorted/grammar#definition-relational-expression">relational-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-and-expression">
+  <h2 class="line-text">and-expression</h2>
+  <p>
+    We say that a string s is an and-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-equality-expression">equality-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-and-expression">and-expression</a>
+      &
+      <a class="rlink" href="/unsorted/grammar#definition-equality-expression">equality-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-exclusive-or-expression">
+  <h2 class="line-text">exclusive-or-expression</h2>
+  <p>
+    We say that a string s is an exclusive-or-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-and-expression">and-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-exclusive-or-expression">exclusive-or-expression</a>
+      ^
+      <a class="rlink" href="/unsorted/grammar#definition-and-expression">and-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-inclusive-or-expression">
+  <h2 class="line-text">inclusive-or-expression</h2>
+  <p>
+    We say that a string s is an inclusive-or-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-exclusive-or-expression">exclusive-or-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-inclusive-or-expression">inclusive-or-expression</a>
+      |
+      <a class="rlink" href="/unsorted/grammar#definition-exclusive-or-expression">exclusive-or-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-logical-and-expression">
+  <h2 class="line-text">logical-and-expression</h2>
+  <p>
+    We say that a string s is a logical-and-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-inclusive-or-expression">inclusive-or-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-logical-and-expression">logical-and-expression</a>
+      &&
+      <a class="rlink" href="/unsorted/grammar#definition-inclusive-or-expression">inclusive-or-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-logical-or-expression">
+  <h2 class="line-text">logical-or-expression</h2>
+  <p>
+    We say that a string s is a logical-or-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-logical-and-expression">logical-and-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-logical-or-expression">logical-or-expression</a>
+      ||
+      <a class="rlink" href="/unsorted/grammar#definition-logical-and-expression">logical-and-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-conditional-expression">
+  <h2 class="line-text">conditional-expression</h2>
+  <p>
+    We say that a string s is a conditional-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-logical-or-expression">logical-or-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-logical-or-expression">logical-or-expression</a>
+      ?
+      <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a> :
+      <a class="rlink" href="/unsorted/grammar#definition-assignment-expression">assignment-expression</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-assignment-expression">
+  <h2 class="line-text">assignment-expression</h2>
+  <p>
+    We say that a string s is an assignment-expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-conditional-expression">conditional-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-yield-expression">yield-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-throw-expression">throw-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-logical-or-expression">logical-or-expression</a>
+      <a class="rlink" href="/unsorted/grammar#definition-assignment-operator">assignment-operator</a>
+      <a class="rlink" href="/unsorted/grammar#definition-initializer-clause">initializer-clause</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-expression">
+  <h2 class="line-text">expression</h2>
+  <p>
+    We say that a string s is an expression when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-assignment-expression">assignment-expression</a></li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-expression">expression</a>,
+      <a class="rlink" href="/unsorted/grammar#definition-assignment-expression">assignment-expression</a>
+    </li>
+  </ul>
+</div>
+
+
 
 <div class="definition" id="definition-identifier-start">
   <h2 class="line-text">identifier-start</h2>
@@ -93,6 +528,198 @@
     <li>
       <code>operator</code> <a class="rlink" href="/unsorted/grammar#definition-operator">operator</a>
     </li>
+  </ul>
+</div>
+
+<div class="definition" id="definition-template-name">
+  <h2 class="line-text">template-name</h2>
+  <p>
+    We say that a string s is a template-name when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a></li>
+  </ul>
+</div>
+
+<div class="definition" id="definition-template-argument-name">
+  <h2 class="line-text">template-argument-name</h2>
+  <p>
+    We say that a string s is a template-argument-name when it is any of the following:
+  </p>
+  <ul>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-nested-name-specifieropt">nested-name-specifier<code>opt</code></a>
+      <a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-nested-name-specifier">nested-name-specifier</a>
+      template
+      <a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-nested-name-specifier">
+  <h2 class="line-text">nested-name-specifier</h2>
+  <p>
+    We say that a string s is a nested-name-specifier when it is any of the following:
+  </p>
+  <ul>
+    <li>::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-type-name">type-name</a> ::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-namespace-name">namespace-name</a> ::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-computed-type-specifier">computed-type-specifier</a> ::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-splice-scope-specifier">splice-scope-specifier</a> ::</li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-nested-name-specifier">nested-name-specifier</a>
+      <a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a> ::
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-nested-name-specifier">nested-name-specifier</a>
+      template<code>opt</code>
+      <a class="rlink" href="/unsorted/grammar#definition-simple-template-id">simple-template-id</a> ::
+    </li>
+  </ul>
+</div>
+
+<div class="definition" id="definition-namespace-name">
+  <h2 class="line-text">namespace-name</h2>
+  <p>
+    We say that a string s is a namespace-name when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-namespace-alias">namespace-alias</a></li>
+  </ul>
+</div>
+
+<div class="definition" id="definition-computed-type-specifier">
+  <h2 class="line-text">computed-type-specifier</h2>
+  <p>
+    We say that a string s is a computed-type-specifier when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-decltype-specifier">decltype-specifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-pack-index-specifier">pack-index-specifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-splice-type-specifier">splice-type-specifier</a></li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-nested-name-specifier">
+  <h2 class="line-text">nested-name-specifier</h2>
+  <p>
+    We say that a string s is a nested-name-specifier when it is any of the following:
+  </p>
+  <ul>
+    <li>::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-type-name">type-name</a> ::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-namespace-name">namespace-name</a> ::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-computed-type-specifier">computed-type-specifier</a> ::</li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-splice-scope-specifier">splice-scope-specifier</a> ::</li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-nested-name-specifier">nested-name-specifier</a>
+      <a class="rlink" href="/unsorted/grammar#definition-identifier">identifier</a> ::
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-nested-name-specifier">nested-name-specifier</a>
+      template<code>opt</code>
+      <a class="rlink" href="/unsorted/grammar#definition-simple-template-id">simple-template-id</a> ::
+    </li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-template-argument">
+  <h2 class="line-text">template-argument</h2>
+  <p>
+    We say that a string s is a template-argument when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-template-argument-name">template-argument-name</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-constant-expression">constant-expression</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-type-id">type-id</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-braced-init-list">braced-init-list</a></li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-template-argument-list">
+  <h2 class="line-text">template-argument-list</h2>
+  <p>
+    We say that a string s is a template-argument-list when it is any of the following:
+  </p>
+  <ul>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-template-argument">template-argument</a>
+      <code>...</code><code>opt</code>
+    </li>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-template-argument-list">template-argument-list</a>,
+      <a class="rlink" href="/unsorted/grammar#definition-template-argument">template-argument</a>
+      <code>...</code>
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-simple-template-id">
+  <h2 class="line-text">simple-template-id</h2>
+  <p>
+    We say that a string s is a simple-template-id when it consists of the following:
+  </p>
+  <ul>
+    <li>
+      <a class="rlink" href="/unsorted/grammar#definition-template-name">template-name</a>
+      &lt; <a class="rlink" href="/unsorted/grammar#definition-template-argument-listopt">template-argument-list<code>opt</code></a> &gt;
+    </li>
+  </ul>
+</div>
+
+
+<div class="definition" id="definition-type-name">
+  <h2 class="line-text">type-name</h2>
+  <p>
+    We say that a string s is a type-name when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-class-name">class-name</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-enum-name">enum-name</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-typedef-name">typedef-name</a></li>
+  </ul>
+</div>
+
+
+
+<div class="definition" id="definition-simple-type-specifier">
+  <h2 class="line-text">simple-type-specifier</h2>
+  <p>
+    We say that a string s is a simple-type-specifier when it is any of the following:
+  </p>
+  <ul>
+    <li><a class="rlink" href="/unsorted/grammar#definition-nested-name-specifieropt">nested-name-specifier<code>opt</code></a> <a class="rlink" href="/unsorted/grammar#definition-type-name">type-name</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-nested-name-specifier">nested-name-specifier</a> template <a class="rlink" href="/unsorted/grammar#definition-simple-template-id">simple-template-id</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-computed-type-specifier">computed-type-specifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-placeholder-type-specifier">placeholder-type-specifier</a></li>
+    <li><a class="rlink" href="/unsorted/grammar#definition-nested-name-specifieropt">nested-name-specifier<code>opt</code></a> <a class="rlink" href="/unsorted/grammar#definition-template-name">template-name</a></li>
+    <li>char</li>
+    <li>char8_t</li>
+    <li>char16_t</li>
+    <li>char32_t</li>
+    <li>wchar_t</li>
+    <li>bool</li>
+    <li>short</li>
+    <li>int</li>
+    <li>long</li>
+    <li>signed</li>
+    <li>unsigned</li>
+    <li>float</li>
+    <li>double</li>
+    <li>void</li>
   </ul>
 </div>
 
